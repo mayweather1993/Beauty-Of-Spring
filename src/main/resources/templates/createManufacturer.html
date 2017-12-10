@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+    <title>Registration</title>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/" th:href="@{/}">HomeWork project</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/" th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <h1>Create manufacturer</h1>
+    <form th:action="@{/manufacturer}" th:object="${manufacturer}" method="post">
+
+        <p class="error-message"
+           th:if="${#fields.hasGlobalErrors()}"
+           th:each="error : ${#fields.errors('global')}"
+           th:text="${error}">Validation error</p>
+
+        <div class="form-group"
+             th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
+            <label for="name" class="control-label">Name</label>
+            <input id="name"
+                   class="form-control"
+                   th:field="*{name}"/>
+            <p class="error-message"
+               th:each="error: ${#fields.errors('name')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Create</button>
+        </div>
+
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
